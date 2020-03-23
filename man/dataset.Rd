@@ -15,9 +15,9 @@ An object of class \code{data.frame} with 54351 rows and 7 columns.
 
 An object of class \code{data.frame} with 15591 rows and 7 columns.
 
-An object of class \code{data.frame} with 44 rows and 7 columns.
+An object of class \code{data.frame} with 48 rows and 7 columns.
 
-An object of class \code{data.frame} with 11 rows and 5 columns.
+An object of class \code{data.frame} with 12 rows and 5 columns.
 }
 \source{
 \code{c19dw}: \url{https://query.data.world}
