@@ -21,7 +21,13 @@
 "c19jh"
 
 #' @usage NULL
-#' @description \code{c19tr}: Data for Turkey
+#' @description \code{c19trl}: Data for Turkey (Long format)
 #' @rdname dataset
-#' @source \code{c19tr}: \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/}
-"c19tr"
+#' @source \code{c19tr}: \url{https://twitter.com/drfahrettinkoca}
+"c19trl"
+
+#' @usage NULL
+#' @description \code{c19trl}: Data for Turkey (Wide format)
+#' @rdname dataset
+#' @source \code{c19tr}: \url{https://twitter.com/drfahrettinkoca}
+"c19trw"

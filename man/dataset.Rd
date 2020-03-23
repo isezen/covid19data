@@ -5,7 +5,8 @@
 \alias{c19dw}
 \alias{c19ra}
 \alias{c19jh}
-\alias{c19tr}
+\alias{c19trl}
+\alias{c19trw}
 \title{Covid-19 dataset}
 \format{
 An object of class \code{data.frame} with 54712 rows and 7 columns.
@@ -14,7 +15,9 @@ An object of class \code{data.frame} with 54351 rows and 7 columns.
 
 An object of class \code{data.frame} with 15591 rows and 7 columns.
 
-An object of class \code{data.frame} with 33 rows and 8 columns.
+An object of class \code{data.frame} with 44 rows and 7 columns.
+
+An object of class \code{data.frame} with 11 rows and 5 columns.
 }
 \source{
 \code{c19dw}: \url{https://query.data.world}
@@ -23,7 +26,9 @@ An object of class \code{data.frame} with 33 rows and 8 columns.
 
 \code{c19jh}: \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/}
 
-\code{c19tr}: \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/}
+\code{c19tr}: \url{https://twitter.com/drfahrettinkoca}
+
+\code{c19tr}: \url{https://twitter.com/drfahrettinkoca}
 }
 \description{
 \code{c19dw}: Data from data.world
@@ -32,7 +37,9 @@ An object of class \code{data.frame} with 33 rows and 8 columns.
 
 \code{c19jh}: Data from John Hopkins University
 
-\code{c19tr}: Data for Turkey
+\code{c19trl}: Data for Turkey (Long format)
+
+\code{c19trl}: Data for Turkey (Wide format)
 }
 \details{
 Covid-19 datasets from various sources
