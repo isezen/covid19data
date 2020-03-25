@@ -52,20 +52,25 @@ read_url_jh <- function(from = "2020-01-22",
     x <- loc[i,, drop = FALSE]
     i <- which(!(is.na(x$lat) & is.na(x$long)))
     if (length(i) > 0) {
-      x <- x[i,, drop = FALSE]
-      x <- x[1,, drop = FALSE]
+      y <- x[i,, drop = FALSE]
+      x <- y[1,, drop = FALSE]
     }
     return(x)
   }, simplify = FALSE)
   loc <- do.call(rbind, a$x)
-
   df2 <- do.call(rbind, df)
-  df2 <- merge(df2, loc)
-  df2 <- df2[,cn]
+  # df2 <- merge(df2, loc)
+  # df2 <- df2[,cn]
+  x <- apply(df2[,2:5], 1, paste0, collapse = "")
+  y <- apply(loc[,1:4], 1, paste0, collapse = ""); names(y) <- NULL
+  for (i in y) {
+    df2[which(i == x), "lat"] <- loc[which(i == y), "lat"]
+    df2[which(i == x), "long"] <- loc[which(i == y), "long"]
+  }
   df2 <- with(df2, df2[order(country_region, province_state, admin2, date),])
   for (i in 3:5) df2[,i] <- factor(df2[,i])
   lubridate::year(df2[lubridate::year(df2$date) == 20, 1]) <- 2020
-  df2 <- df2[!duplicated(df2),]
+  df2 <- df2[!duplicated(df2[,-(6:7)]),]
   by <- lapply(df2[,c(1:7)], factor, exclude = NULL)
   a <- aggregate(1:nrow(df2), by, function(i) {
     x <- df2[i, 8:11]
@@ -147,17 +152,16 @@ download.c19 <- function(from = c("dworld", "ramikrispin", "jh")) {
 #' @usage update.c19jh()
 #' @export update.c19jh
 update.c19jh <- function() {
-  data(c19jh)
-  max_date <- as.Date(max(c19jh$date))
+  df <- c19jh_w
+  max_date <- as.Date(max(df$date))
   today <- Sys.Date()
   if (max_date < today) {
-    df <- read_url_jh(max_date, today)
-    if (!is.null(df)) {
-      c19jh <- rbind(c19jh, df)
+    df2 <- read_url_jh(max_date, today)
+    if (!is.null(df2)) {
+      df <- rbind(df, df2)
     }
-    c19jh <- c19jh[!duplicated(c19jh),]
-    c19jh <- c19jh[order(c19jh$country_region, c19jh$province_state,
-                         c19jh$date),]
+    df <- df[!duplicated(df),]
+    df <- with(df, df[order(country_region, province_state, admin2, date),])
   }
-  invisible(NULL)
+  return(df)
 }

@@ -54,3 +54,8 @@ for (data_name in list("c19dw_w", "c19ra_w", "c19jh_w")) {
   eval(parse(text = sprintf(cmd, data_name, data_name)))
 }
 
+# dfu <- update.c19jh()
+# dfu <- dfu[dfu$date > ISOdatetime(2020, 3, 24, 0, 0, 0),]
+#
+# dfo <- c19jh_w[c19jh_w$date > ISOdatetime(2020, 3, 24, 0, 0, 0),]
+
