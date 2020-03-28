@@ -10,17 +10,17 @@
 \alias{c19jhl}
 \title{Covid-19 dataset}
 \format{
-An object of class \code{data.frame} with 19407 rows and 7 columns.
+An object of class \code{data.frame} with 19771 rows and 7 columns.
 
-An object of class \code{data.frame} with 38740 rows and 7 columns.
+An object of class \code{data.frame} with 39468 rows and 7 columns.
 
-An object of class \code{data.frame} with 15680 rows and 7 columns.
+An object of class \code{data.frame} with 16434 rows and 7 columns.
 
-An object of class \code{data.frame} with 31360 rows and 7 columns.
+An object of class \code{data.frame} with 32868 rows and 7 columns.
 
-An object of class \code{data.frame} with 22026 rows and 11 columns.
+An object of class \code{data.frame} with 25438 rows and 11 columns.
 
-An object of class \code{data.frame} with 88104 rows and 9 columns.
+An object of class \code{data.frame} with 101752 rows and 9 columns.
 }
 \source{
 \code{c19dw}: \url{https://query.data.world}
