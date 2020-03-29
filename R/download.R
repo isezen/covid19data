@@ -3,6 +3,32 @@ remove_uniq_cols <- function(df) {
   df[,apply(df, 2, function(x) length(unique(x)) != 1)]
 }
 
+read_url_jh_ts <- function() {
+  file_names <- c("confirmed", "deaths", "recovered")
+  url <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/"
+  url <- paste0(url, "master/csse_covid_19_data/csse_covid_19_time_series/")
+  url <- paste0(url, "time_series_covid19_%s_global.csv")
+  dfl <- lapply(file_names, function(f) {
+    df <- read.csv(sprintf(url, f), stringsAsFactors = FALSE,
+                   strip.white = TRUE, na.strings = "")
+    df <- reshape2::melt(df, measure.vars = colnames(df)[-(1:4)],
+                         variable.name = "date", value.name = "cases")
+    df$type <- f
+    return(df)
+  })
+  df <- do.call(rbind, dfl)
+  colnames(df) <- tolower(colnames(df))
+  colnames(df) <- gsub(".", "_", colnames(df), fixed = TRUE)
+  # df$date <- as.POSIXct(as.POSIXlt(df$date, "UTC", "X%m.%d.%y"))
+  df$date <- as.Date(df$date, "X%m.%d.%y")
+  substring(df$type, 1) <- toupper(substring(df$type, 1, 1))
+  df[,c(1,2,7)] <- lapply(df[,c(1,2,7)], factor)
+  df <- df[,c("date", "country_region", "province_state", "lat", "long",
+              "type", "cases")]
+  df <- with(df, df[order(country_region, province_state, date, type),])
+  return(df)
+}
+
 read_url_jh <- function(from = "2020-01-22",
                         to = as.character(Sys.Date())) {
   cn <- c("date", "fips", "country_region", "province_state", "admin2",
@@ -141,7 +167,7 @@ read_data <- function(from = c("dworld", "ramikrispin")) {
 #' @export
 download.c19 <- function(from = c("dworld", "ramikrispin", "jh")) {
   from <- match.arg(from, c("dworld", "ramikrispin", "jh"))
-  df <- if (from == "jh") read_url_jh() else read_data(from)
+  df <- if (from == "jh") read_url_jh_ts() else read_data(from)
   return(df)
 }
 
