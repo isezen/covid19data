@@ -12,7 +12,7 @@
 \format{
 An object of class \code{data.frame} with 20553 rows and 7 columns.
 
-An object of class \code{data.frame} with 40468 rows and 7 columns.
+An object of class \code{data.frame} with 41100 rows and 7 columns.
 
 An object of class \code{data.frame} with 16951 rows and 7 columns.
 
