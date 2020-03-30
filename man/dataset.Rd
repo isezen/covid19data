@@ -10,7 +10,7 @@
 \alias{c19jhl}
 \title{Covid-19 dataset}
 \format{
-An object of class \code{data.frame} with 20553 rows and 7 columns.
+An object of class \code{data.frame} with 20550 rows and 7 columns.
 
 An object of class \code{data.frame} with 41100 rows and 7 columns.
 
@@ -18,7 +18,7 @@ An object of class \code{data.frame} with 16951 rows and 7 columns.
 
 An object of class \code{data.frame} with 33902 rows and 7 columns.
 
-An object of class \code{data.frame} with 17219 rows and 8 columns.
+An object of class \code{data.frame} with 17476 rows and 8 columns.
 
 An object of class \code{data.frame} with 50660 rows and 7 columns.
 }
