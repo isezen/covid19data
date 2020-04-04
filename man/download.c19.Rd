@@ -4,7 +4,7 @@
 \alias{download.c19}
 \title{Download Covid19 data}
 \usage{
-download.c19(from = c("dworld", "ramikrispin", "jh"))
+download.c19(from = "jh")
 }
 \description{
 Download Covid19 data

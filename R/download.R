@@ -3,7 +3,7 @@ remove_uniq_cols <- function(df) {
   df[,apply(df, 2, function(x) length(unique(x)) != 1)]
 }
 
-read_url_jh_ts <- function() {
+read_jh_ts <- function() {
   file_names <- c("confirmed", "deaths", "recovered")
   url <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/"
   url <- paste0(url, "master/csse_covid_19_data/csse_covid_19_time_series/")
@@ -29,7 +29,7 @@ read_url_jh_ts <- function() {
   return(df)
 }
 
-read_url_jh <- function(from = "2020-01-22",
+read_jh_daily <- function(from = "2020-01-22",
                         to = as.character(Sys.Date())) {
   cn <- c("date", "fips", "country_region", "province_state", "admin2",
           "lat", "long", "confirmed", "deaths", "recovered", "active")
@@ -165,29 +165,8 @@ read_data <- function(from = c("dworld", "ramikrispin")) {
 #' Download Covid19 data
 #'
 #' @export
-download.c19 <- function(from = c("dworld", "ramikrispin", "jh")) {
-  from <- match.arg(from, c("dworld", "ramikrispin", "jh"))
-  df <- if (from == "jh") read_url_jh_ts() else read_data(from)
-  return(df)
-}
-
-#' Update c19jh dataset
-#'
-#' If dataset is outdated, updates c19jh dataset.
-#'
-#' @usage update.c19jh()
-#' @export update.c19jh
-update.c19jh <- function() {
-  df <- c19jh_w
-  max_date <- as.Date(max(df$date))
-  today <- Sys.Date()
-  if (max_date < today) {
-    df2 <- read_url_jh(max_date, today)
-    if (!is.null(df2)) {
-      df <- rbind(df, df2)
-    }
-    df <- df[!duplicated(df),]
-    df <- with(df, df[order(country_region, province_state, admin2, date),])
-  }
+download.c19 <- function(from = "jh") {
+  from <- match.arg(from, c("jh"))
+  df <- read_jh_ts()
   return(df)
 }
