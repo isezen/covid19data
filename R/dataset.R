@@ -1,18 +1,19 @@
-#' Covid-19 dataset
+#' Covid-19 Datasets
 #'
-#' @details Covid-19 datasets from various sources
+#' @description
+#' Covid-19 datasets various resources.
 #'
-#' [datasetname]w is wide format
+#' \code{c19jh}: John-Hopkins University
 #'
-#' [datasetname]l is long format
+#' @details
+#' \code{[dataset_name]w}: wide format
 #'
-#' @usage NULL
-#' @description \code{c19jhw}: Data from John Hopkins University (Wide format)
-#' @rdname dataset
-#' @source \code{c19jh}: \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/}
+#' \code{[dataset_name]l}: long format
+#'
+#' @usage c19jhw # wide format
+#' @source \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/}
 "c19jhw"
 
-#' @usage NULL
-#' @description \code{c19jhl}: Data from John Hopkins University (Long format)
-#' @rdname dataset
+#' @usage c19jhl # long format
+#' @rdname c19jhw
 "c19jhl"
