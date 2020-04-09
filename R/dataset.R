@@ -11,14 +11,18 @@
 #' and Netherlands. You can see long format of these data sources by adding
 #' 3-letters iso code at the end of 'c19.' string i.e., 'c19.gbr'.
 #'
-#' \code{[dataset_name]w}: wide format
-#'
 #' \code{[dataset_name]l}: long format
 #'
-#' @usage c19w # wide format
+#' @usage c19 # wide format
 #' @source \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/}
 "c19"
 
 #' @usage c19l # long format
 #' @rdname c19
 "c19l"
+
+#' Lookup Table
+#'
+#' @usage lookup
+#' @source \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/}
+"lookup"
