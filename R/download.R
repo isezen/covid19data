@@ -19,13 +19,17 @@ read_jh_ts <- function() {
   df <- do.call(rbind, dfl)
   colnames(df) <- tolower(colnames(df))
   colnames(df) <- gsub(".", "_", colnames(df), fixed = TRUE)
-  # df$date <- as.POSIXct(as.POSIXlt(df$date, "UTC", "X%m.%d.%y"))
   df$date <- as.Date(df$date, "X%m.%d.%y")
-  substring(df$type, 1) <- toupper(substring(df$type, 1, 1))
+  # substring(df$type, 1) <- toupper(substring(df$type, 1, 1))
   df[,c(1,2,7)] <- lapply(df[,c(1,2,7)], factor)
   df <- df[,c("date", "country_region", "province_state", "lat", "long",
               "type", "cases")]
   df <- with(df, df[order(country_region, province_state, date, type),])
+  df <- reshape2::dcast(df, date + country_region + province_state ~ type,
+                         value.var = "cases")
+  df$active <- with(df, confirmed - recovered - deaths)
+  df$recovered[which(df$recovered == 0)] <- NA
+  df[!sapply(df, is.finite)] <- NA
   return(df)
 }
 

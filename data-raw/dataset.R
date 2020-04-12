@@ -23,13 +23,30 @@ for (i in 1:length(names)) {
   eval(parse(text = sprintf("use_data(%s, overwrite = TRUE)", data_name)))
 }
 
-c19l <- aggregate(cases ~ type + date + country_region, df, sum)
-c19l <- c19l[,colnames(df)[-c(3:5)]]
+c19l <- reshape2::melt(df, id.vars = 1:3, variable.name = "type", value.name = "cases")
+c19l <- aggregate(cases ~ type + date + country_region, c19l, sum)
+c19l <- c19l[,c("date", "country_region", "type", "cases")]
+c19l <- with(c19l, c19l[order(date, country_region, type),])
 
 # Wide format for John-Hopkins data
 c19 <- reshape2::dcast(c19l, date + country_region ~ type, value.var = "cases")
 colnames(c19) <- tolower(colnames(c19))
-use_data(c19l, c19, overwrite = TRUE)
+c19$recovered[which(c19$recovered == 0)] <- NA
+c19[!sapply(c19, is.finite)] <- NA
+
+use_data(c19, c19l, overwrite = TRUE)
+
+for (i in 1:length(names)) {
+  data_name <- tolower(paste0("c19.", gsub("[[:space:]]", "", snames[i])))
+  data_name2 <- tolower(paste0("c19l.", gsub("[[:space:]]", "", snames[i])))
+  eval(parse(text = paste0("df <- ", data_name)))
+  df <- reshape2::melt(df, id.vars = 1:3, variable.name = "type", value.name = "cases")
+  df <- with(df, df[order(date, country_region, province_state, type),])
+  eval(parse(text = paste0(data_name2, " <- df")))
+  df3 <- c19[c19$country_region == names[i],]
+  eval(parse(text = sprintf("use_data(%s, overwrite = TRUE)", data_name2)))
+}
+
 # -------------
 
 cmd <- "write.csv2(%s, 'data-raw/%s.csv', row.names = FALSE, quote = FALSE, na = '')"
