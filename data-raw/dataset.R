@@ -1,11 +1,19 @@
 library(usethis)
 source("R/download.R")
 
+countries_tr <- read.csv2('data-raw/countries_tr.csv', stringsAsFactors = TRUE)
+
 url_lookup <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv"
 col_colasses <- c("integer", "factor",  "factor", "factor", "factor",
                   "factor", "factor", "factor", "numeric", "numeric",
                   "factor", "integer")
 lookup <- read.csv(url_lookup, colClasses = col_colasses)
+cn <- tolower(colnames(lookup))
+cn[startsWith(cn, "long")] <- "long"
+colnames(lookup) <- cn
+lookup <- merge(lookup, countries_tr)
+lookup <- lookup[,c(2:8, 1, 13, 9:12)]
+lookup$country_region_tr <- droplevels(lookup$country_region_tr)
 use_data(lookup, overwrite = TRUE)
 
 # c19jhw <- c19jhl <- NULL
