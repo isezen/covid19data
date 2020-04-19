@@ -20,8 +20,8 @@ use_data(lookup, overwrite = TRUE)
 df <- download.c19("jh")
 df2 <- df[!duplicated(df[,2:3]), 2:3]
 names <- unique(df2[duplicated(df2[,1]), 1])
-i <- lookup[which(lookup$Country_Region %in% names & lookup$Province_State == ""),]
-i <- i[order(i$Country_Region),]
+i <- lookup[which(lookup$country_region %in% names & lookup$province_state == ""),]
+i <- i[order(i$country_region),]
 snames <- tolower(i$iso3)
 
 for (i in 1:length(names)) {
