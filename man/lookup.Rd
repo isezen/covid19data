@@ -5,7 +5,7 @@
 \alias{lookup}
 \title{Lookup Table}
 \format{
-An object of class \code{data.frame} with 3590 rows and 13 columns.
+An object of class \code{data.frame} with 3609 rows and 13 columns.
 }
 \source{
 \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/}
