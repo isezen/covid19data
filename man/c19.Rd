@@ -6,9 +6,9 @@
 \alias{c19l}
 \title{Covid-19 Datasets}
 \format{
-An object of class \code{data.frame} with 18887 rows and 6 columns.
+An object of class \code{data.frame} with 20944 rows and 6 columns.
 
-An object of class \code{data.frame} with 64535 rows and 4 columns.
+An object of class \code{data.frame} with 72711 rows and 4 columns.
 }
 \source{
 \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/}
